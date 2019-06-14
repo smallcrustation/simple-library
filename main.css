@@ -1,0 +1,44 @@
+body * {
+    /* border: 1px solid orange; */
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body{
+    margin-top: 30px; 
+}
+
+h1 {
+    font-size: 30px;
+}
+
+.container {
+    border: 1px orangered solid;
+    display: flex;
+}
+
+.controls button{
+    border: none;
+    font-size: 20px;
+    border: 10px black solid;
+    margin: 5px;
+    margin-top: 45%;
+}
+.controls button:hover{
+    cursor: pointer;
+}
+
+.book-list{
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-list ul{
+    border: black 20px;
+    border-style: solid;
+    list-style: decimal-leading-zero;
+    padding-right: 2px;
+    padding-left: 2px;
+    list-style-position: inside;
+    text-align: left;
+}
