@@ -20,7 +20,7 @@ function render() {
     for (let book in library) {
         bookUl += `
         <li>
-            ${library[book].info()}, <button>${library[book].read ? 'read' : 'not read'}</button>
+            ${library[book].info()}, <button class="read-button" value=${book}>${library[book].read ? 'read' : 'not read'}</button>
             <button class="delete-book" value="${book}"></button>
         </li>`;
     }
@@ -30,10 +30,17 @@ function render() {
     // --- listen for a delete book event ---
     // list like thing of all elements with class 'delete-book'
     const delBookElements = document.getElementsByClassName("delete-book");
-    
+    const readBookElements = document.getElementsByClassName("read-button");
+
+    // add even listeners for delete-book and read-button
     for (let i=0; i<delBookElements.length; i++){
         delBookElements[i].addEventListener('click', (e) =>{
             library.splice(e.target.value, 1);
+            render();
+        })
+        readBookElements[i].addEventListener('click', (e) =>{
+            const tempBook = library[e.target.value];
+            tempBook.read = !tempBook.read;
             render();
         })
     }
