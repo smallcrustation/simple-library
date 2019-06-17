@@ -1,5 +1,3 @@
-let form = document.getElementById("add-book-btn");
-
 // ################------ Books ------################
 let library = [];
 
@@ -26,7 +24,7 @@ function render(){
     document.getElementById("book-list").innerHTML = bookUl;
 }
 
-// ################------ Display add books/form ------################
+// ################------ Display add books btn/form ------################
 // shows the form to add a book and hide add book button
 function addBookForm(){
     let form = `
@@ -50,7 +48,6 @@ function addBookForm(){
     <input type="submit" id="add-book-btn" value="add"> <button onclick="hideForm()">nvm</button>
 </form>`
 
-    //document.getElementById("controls").style.visibility = "hidden";
     document.getElementById("controls").innerHTML = form;
 }
 
@@ -58,6 +55,13 @@ function hideForm(){
     let controls = '<button onclick="addBookForm()">Add Book</button>';
 
     document.getElementById("controls").innerHTML = controls;
+}
+
+// ################------ on form submit ------################
+let form = document.getElementById("add-book-form");
+if(form !== null){
+    console.log('in form');
+    form.addEventListener("submit", alert('clicked add'));
 }
 
 
@@ -72,9 +76,6 @@ addBookToLibrary(book3);
 
 // ##### Run functions #####
 
-//form.onsubmit = addBookToLibrary(new Book(form.name.value));
-//form.onsubmit = console.log(form.title.value);
-console.log(render());
 render();
 
 
