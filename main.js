@@ -7,7 +7,7 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
     this.info = function () {
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? 'read' : 'not read'}`;
+        return `${this.title} by ${this.author}, ${this.pages} pages`//, ${this.read ? 'read' : 'not read'}`;
     }
 }
 
@@ -20,8 +20,8 @@ function render() {
     for (let book in library) {
         bookUl += `
         <li>
-            ${library[book].info()}
-            <button class="delete-book" value="${book}">D</button>
+            ${library[book].info()}, <button>${library[book].read ? 'read' : 'not read'}</button>
+            <button class="delete-book" value="${book}"></button>
         </li>`;
     }
 
@@ -46,20 +46,25 @@ function addBookForm() {
     let formHtml = `
     <form id="add-book-form">
     <div>
-        <label>Title:</label>
-        <input type="text" name="title" id="title" required />
+        <label>Title:
+            <input type="text" name="title" id="title" required />
+        </label>
     </div>
     <div>
-        <label>Author:</label>
-        <input type="text" name="author" id="author" required />
+        <label>Author:
+            <input type="text" name="author" id="author" required />
+        </label>
     </div>
     <div>
-        <label>Pages:</label>
-        <input type="text" name="pages" id="pages" required />
+        <label>Pages:
+            <input type="text" name="pages" id="pages" required />
+        </label>
     </div>
     <div>
-        <label>Read:</label>
-        <input type="checkbox" name="read" id="read" />
+        <label>Read:
+            <input type="checkbox" name="read" id="read"/>
+            <span class="checkbox"></span>
+        </label>
     </div>
     <input type="submit" id="add-book-btn" value="add"> <button onclick="hideForm()">nvm</button>
 </form>`
