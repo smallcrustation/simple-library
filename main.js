@@ -1,12 +1,12 @@
 // ################------ Books ------################
 let library = [];
 
-function Book(title, author, pages, read){
+function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = function(){
+    this.info = function () {
         return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? 'read' : 'not read'}`;
     }
 }
@@ -15,19 +15,35 @@ function addBookToLibrary(book) {
     library.push(book);
 }
 
-function render(){
+function render() {
     let bookUl = '';
-    for(let book in library){
-        bookUl += `<li>${library[book].info()}</li>`;
+    for (let book in library) {
+        bookUl += `
+        <li>
+            ${library[book].info()}
+            <button class="delete-book" value="${book}">D</button>
+        </li>`;
     }
 
     document.getElementById("book-list").innerHTML = bookUl;
+
+    // --- listen for a delete book event ---
+    // list like thing of all elements with class 'delete-book'
+    const delBookElements = document.getElementsByClassName("delete-book");
+    
+    for (let i=0; i<delBookElements.length; i++){
+        delBookElements[i].addEventListener('click', (e) =>{
+            library.splice(e.target.value, 1);
+            render();
+        })
+    }
+
 }
 
 // ################------ Display add books btn/form ------################
 // shows the form to add a book and hide add book button
-function addBookForm(){
-    let form = `
+function addBookForm() {
+    let formHtml = `
     <form id="add-book-form">
     <div>
         <label>Title:</label>
@@ -48,21 +64,34 @@ function addBookForm(){
     <input type="submit" id="add-book-btn" value="add"> <button onclick="hideForm()">nvm</button>
 </form>`
 
-    document.getElementById("controls").innerHTML = form;
+    document.getElementById("controls").innerHTML = formHtml;
+
+    // --- setup listener for submit of form ---
+    const form = document.getElementById("add-book-form");
+    form.addEventListener("submit", function (e) {
+        // prevent default form submit action
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        console.log('added' + formData.get('author'));
+        // add book to library list
+        addBookToLibrary(new Book(formData.get('title'), formData.get('author'), formData.get('pages'), formData.get('read')));
+
+        // hide form
+        hideForm();
+
+        // render list
+        render();
+
+    });
+
 }
 
-function hideForm(){
+function hideForm() {
     let controls = '<button onclick="addBookForm()">Add Book</button>';
-
+    console.log('form closed');
     document.getElementById("controls").innerHTML = controls;
 }
 
-// ################------ on form submit ------################
-let form = document.getElementById("add-book-form");
-if(form !== null){
-    console.log('in form');
-    form.addEventListener("submit", alert('clicked add'));
-}
 
 
 // ################------ add default books ------################
