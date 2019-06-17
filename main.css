@@ -1,10 +1,7 @@
 body * {
     /* border: 1px solid orange; */
     font-family: 'Times New Roman', Times, serif;
-}
-
-body{
-    margin-top: 30px; 
+    box-sizing: border-box;
 }
 
 h1 {
@@ -14,23 +11,45 @@ h1 {
 .container {
     border: 1px orangered solid;
     display: flex;
+    justify-content: center;
 }
 
-.controls button{
+.controls{
+    clear: both;
+}
+
+.controls div{
+    clear: both;
+}
+
+.controls label{
+    float: left;
+}
+
+.controls input{
+    width: 150px;
+    margin-bottom: 1px;
+    border-color: black;
+    float: right;
+}
+
+.controls button, #add-book-btn{
     border: none;
     font-size: 20px;
     border: 10px black solid;
-    margin: 5px;
-    margin-top: 45%;
+    float: right;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: auto;
 }
+
 .controls button:hover{
     cursor: pointer;
 }
 
 .book-list{
+    width: 500px;
     text-align: center;
-    flex-direction: column;
-    align-items: center;
 }
 
 .book-list ul{
