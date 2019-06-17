@@ -64,7 +64,7 @@ function addBookForm() {
     </div>
     <div>
         <label>Pages:
-            <input type="text" name="pages" id="pages" required />
+            <input type="number" name="pages" id="pages" required />
         </label>
     </div>
     <div>
